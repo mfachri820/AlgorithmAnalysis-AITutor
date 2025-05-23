@@ -1,101 +1,72 @@
-💡 Chatbot Analisis Algoritma
-Ini adalah chatbot berbasis Streamlit yang dirancang untuk membantu pengguna dengan pertanyaan terkait Analisis Algoritma, Struktur Data, Kompleksitas Waktu/Ruang, dan strategi pemecahan masalah. Aplikasi ini memanfaatkan kekuatan Large Language Models (LLM) melalui OpenRouter API untuk memberikan penjelasan yang komprehensif.
+# 💡 Chatbot Analisis Algoritma
 
-✨ Fitur Utama
-Antarmuka Obrolan Interaktif: Dibangun dengan Streamlit untuk antarmuka web yang ramah pengguna.
-Respons Didukung LLM: Memanfaatkan OpenRouter API untuk mengakses model bahasa yang kuat (misalnya, openai/gpt-4.1-nano) untuk penjelasan komprehensif.
-Fokus Analisis Algoritma: Instruksi sistem memandu LLM untuk memberikan informasi yang akurat dan relevan khusus tentang algoritma dan struktur data.
-Sumber Daya Eksternal Umum: Menyediakan tautan statis ke platform studi algoritma populer seperti GeeksforGeeks, HackerRank, dan LeetCode di sidebar.
-Riwayat Obrolan: Mempertahankan konteks percakapan dalam sesi.
-Fungsi Hapus Obrolan: Memungkinkan pengguna untuk mengatur ulang percakapan.
-🚀 Memulai
-Ikuti langkah-langkah ini untuk menjalankan Chatbot Analisis Algoritma Anda di mesin lokal.
+![Algorithm Analysis Chatbot Screenshot (Placeholder)](https://via.placeholder.com/600x300?text=Chatbot+Analisis+Algoritma)
 
-Prasyarat
-Python 3.8+ terinstal di sistem Anda.
-pip (penginstal paket Python).
-1. Klon Repositori (atau Buat File Proyek)
-Jika Anda memiliki repositori Git, klon:
+Chatbot ini dirancang untuk membantu Anda mempelajari **Analisis Algoritma dan Struktur Data** menggunakan Streamlit dan OpenRouter API.
 
-Bash
+---
 
-git clone <url-repositori-anda>
-cd <nama-repositori-anda>
-Jika tidak, buat direktori baru dan tempatkan file-file berikut di dalamnya: app.py, requirements.txt, dan .env.
+## ✨ Fitur
 
-2. Siapkan Lingkungan Python Anda
-Sangat disarankan untuk menggunakan lingkungan virtual untuk mengelola dependensi proyek.
+* **Antarmuka Intuitif:** Chatbot berbasis web dengan Streamlit.
+* **Didukung LLM:** Menggunakan model `openai/gpt-4.1-nano` via OpenRouter untuk penjelasan mendalam.
+* **Fokus Algoritma:** Memberikan jawaban spesifik tentang algoritma, kompleksitas, dan struktur data.
+* **Rekomendasi Sumber Daya:** Menampilkan tautan ke GeeksforGeeks, HackerRank, LeetCode.
+* **Riwayat & Hapus Obrolan:** Mengelola sesi percakapan Anda.
 
-Bash
+---
 
-# Buat lingkungan virtual
-python -m venv chatbot_env
+## 🚀 Memulai
 
-# Aktifkan lingkungan virtual
-# Di macOS/Linux:
-source chatbot_env/bin/activate
-# Di Windows:
-chatbot_env\Scripts\activate
-3. Instal Dependensi
-Dengan lingkungan virtual Anda aktif, instal paket Python yang diperlukan:
+### Prasyarat
 
-requirements.txt content:
+* Python 3.8+ terinstal.
 
-streamlit
-openai
-python-dotenv
-Sekarang, instal:
+### Instalasi
 
-Bash
+1.  **Siapkan Proyek:** Buat folder proyek dan tempatkan `app.py`, `requirements.txt`, dan `.env` di dalamnya.
+2.  **Lingkungan Virtual:**
+    ```bash
+    python -m venv chatbot_env
+    source chatbot_env/bin/activate # macOS/Linux
+    chatbot_env\Scripts\activate     # Windows
+    ```
+3.  **Instal Dependensi:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    (Pastikan `requirements.txt` berisi: `streamlit`, `openai`, `python-dotenv`)
 
-pip install -r requirements.txt
-4. Konfigurasi Kunci API OpenRouter (STEP ini SKIP dlu aja ya, pake API gw dlu aja, tapi santai aja ya ngetest nya, credit pake duit gw soalnya hehehe)
-Anda memerlukan kunci API dari OpenRouter untuk menggunakan model mereka.
+### Konfigurasi API OpenRouter
 
-Dapatkan Kunci API OpenRouter Anda:
+1.  **Dapatkan Kunci API:** Daftar/masuk ke [OpenRouter.ai](https://openrouter.ai/), lalu dapatkan kunci API Anda dari halaman "Keys".
+2.  **Buat `.env`:** Di folder proyek Anda, buat file bernama `.env`.
+3.  **Tambahkan Kunci:** Masukkan kunci API Anda ke `.env` seperti ini:
+    ```
+    OPENROUTER_API_KEY="YOUR_OPENROUTER_API_KEY_HERE"
+    ```
+    **Penting:** Jangan bagikan file `.env` ini!
 
-Kunjungi OpenRouter.ai dan masuk atau daftar.
-Navigasi ke bagian "Keys" Anda (biasanya dapat diakses dari ikon profil Anda).
-Hasilkan dan salin kunci API Anda.
-Buat file .env:
-Di direktori root proyek Anda (direktori yang sama dengan app.py), buat file bernama .env (perhatikan titik di depannya).
+### Jalankan Aplikasi
 
-Tambahkan Kunci API Anda ke .env:
-Buka file .env dan tambahkan baris berikut, ganti YOUR_OPENROUTER_API_KEY_HERE dengan kunci asli Anda:
-
-OPENROUTER_API_KEY="YOUR_OPENROUTER_API_KEY_HERE"
-Penting: Jangan bagikan file .env Anda atau unggah ke kontrol versi publik (seperti GitHub).
-
-5. Jalankan Aplikasi Streamlit
-Dengan lingkungan virtual Anda aktif dan semua file berada di tempatnya, jalankan aplikasi:
-
-Bash
-
+```bash
 streamlit run app.py
-Perintah ini akan membuka chatbot di browser web default Anda (biasanya di http://localhost:8501).
+Aplikasi akan terbuka di browser Anda (biasanya http://localhost:8501).
 
 🤖 Cara Menggunakan
-Ajukan Pertanyaan: Ketik pertanyaan Anda tentang analisis algoritma, struktur data, atau konsep terkait ke dalam kotak input obrolan di bagian bawah halaman.
-Dapatkan Penjelasan: Chatbot akan memberikan penjelasan dan, jika relevan, menyarankan tautan ke platform umum seperti GeeksforGeeks dan HackerRank.
-Hapus Obrolan: Gunakan tombol "Clear Chat History" untuk memulai percakapan baru.
-Jelajahi Sumber Daya: Periksa sidebar untuk tautan cepat ke situs web studi algoritma populer.
+Ketik pertanyaan Anda di kotak obrolan.
+Dapatkan penjelasan dan rekomendasi tautan.
+Gunakan "Clear Chat History" untuk memulai ulang.
 📁 Struktur Proyek
 .
-├── app.py              # Kode aplikasi Streamlit utama
-├── .env                # Menyimpan kunci API OpenRouter Anda (JAGA KERAHASIAANNYA!)
-└── requirements.txt    # Daftar semua dependensi Python
+├── app.py              # Kode utama aplikasi
+├── .env                # Kunci API (RAHASIA!)
+└── requirements.txt    # Daftar dependensi Python
 ⚙️ Kustomisasi
-Mengubah Model LLM:
-Anda dapat mengubah model LLM yang digunakan dengan memodifikasi variabel OPENROUTER_MODEL_NAME di app.py. Kunjungi OpenRouter.ai/docs untuk melihat daftar model yang tersedia dan ID-nya (misalnya, openai/gpt-4-turbo, google/gemini-pro).
-
-Python
-
-OPENROUTER_MODEL_NAME = "openai/gpt-4.1-nano" # Ubah ini ke model yang Anda inginkan
-Sesuaikan SYSTEM_INSTRUCTION:
-Modifikasi string SYSTEM_INSTRUCTION di app.py untuk menyempurnakan persona chatbot dan cara ia merespons pertanyaan.
-
-Perbarui ALGORITHM_LINKS:
-Kamus ALGORITHM_LINKS di app.py menyediakan tautan umum. Anda dapat memperluas atau memodifikasi kamus ini.
-
+Ganti Model LLM: Ubah OPENROUTER_MODEL_NAME di app.py (cek OpenRouter.ai/docs untuk model lain).
+Sesuaikan Persona: Edit SYSTEM_INSTRUCTION di app.py.
+Perbarui Tautan: Modifikasi kamus ALGORITHM_LINKS di app.py.
 🤝 Kontribusi
-Jangan ragu untuk fork repositori ini, buka issue, atau kirim pull request untuk meningkatkan chatbot ini.
+Selamat datang untuk berkontribusi!
+
+📄 Lisensi
