@@ -25,7 +25,7 @@ client = OpenAI(
 # Anda bisa memilih model dari OpenRouter.
 # Contoh model Gemini Pro di OpenRouter adalah 'google/gemini-pro'.
 # Kunjungi openrouter.ai/docs untuk melihat daftar model yang tersedia.
-OPENROUTER_MODEL_NAME = "openai/gpt-4.1-nano"
+OPENROUTER_MODEL_NAME = "openai/gpt-4.1-nano" # Ini adalah nama model yang Anda cari! # Ganti jika Anda ingin model lain
 
 # Konfigurasi generasi untuk model
 generation_config = {
@@ -194,4 +194,4 @@ if prompt := st.chat_input("Ask me about algorithm analysis..."):
 # --- Clear Chat Button ---
 if st.button("Clear Chat History", help="Click to clear all messages in the chat."):
     st.session_state.messages = []
-    st.rerun()
+    st.experimental_rerun()
