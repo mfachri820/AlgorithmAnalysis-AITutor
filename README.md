@@ -37,7 +37,7 @@ Chatbot ini dirancang untuk membantu Anda mempelajari **Analisis Algoritma dan S
     ```
     (Pastikan `requirements.txt` berisi: `streamlit`, `openai`, `python-dotenv`)
 
-### Konfigurasi API OpenRouter
+### Konfigurasi API OpenRouter (Ini lumayan ribet, kalau pengen simple pake yg punya gw dlu aja ya guys)
 
 1.  **Dapatkan Kunci API:** Daftar/masuk ke [OpenRouter.ai](https://openrouter.ai/), lalu dapatkan kunci API Anda dari halaman "Keys".
 2.  **Buat `.env`:** Di folder proyek Anda, buat file bernama `.env`.
