@@ -1,7 +1,3 @@
-Tentu, saya mengerti! Maaf atas kesalahpahaman tersebut. Kita akan membuat README.md yang mencerminkan kode Anda saat ini, tanpa fitur RAG yang belum diimplementasikan.
-
-Berikut adalah README.md yang telah diperbarui untuk aplikasi Anda, sekarang tanpa menyebutkan fitur RAG atau resources.csv.
-
 💡 Chatbot Analisis Algoritma
 Ini adalah chatbot berbasis Streamlit yang dirancang untuk membantu pengguna dengan pertanyaan terkait Analisis Algoritma, Struktur Data, Kompleksitas Waktu/Ruang, dan strategi pemecahan masalah. Aplikasi ini memanfaatkan kekuatan Large Language Models (LLM) melalui OpenRouter API untuk memberikan penjelasan yang komprehensif.
 
