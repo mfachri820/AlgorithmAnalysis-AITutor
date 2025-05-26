@@ -1,0 +1,51 @@
+topic,link
+huffman coding,https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/
+binary search,https://www.geeksforgeeks.org/binary-search/
+linear search,https://www.geeksforgeeks.org/linear-search/
+merge sort,https://www.geeksforgeeks.org/merge-sort/
+quick sort,https://www.geeksforgeeks.org/quick-sort/
+heap sort,https://www.geeksforgeeks.org/heap-sort/
+bubble sort,https://www.geeksforgeeks.org/bubble-sort/
+selection sort,https://www.geeksforgeeks.org/selection-sort/
+insertion sort,https://www.geeksforgeeks.org/insertion-sort/
+radix sort,https://www.geeksforgeeks.org/radix-sort/
+bucket sort,https://www.geeksforgeeks.org/bucket-sort-2/
+counting sort,https://www.geeksforgeeks.org/counting-sort/
+stack,https://www.geeksforgeeks.org/stack-data-structure/
+queue,https://www.geeksforgeeks.org/queue-data-structure/
+priority queue,https://www.geeksforgeeks.org/priority-queue-set-1-introduction/
+linked list,https://www.geeksforgeeks.org/data-structures/linked-list/
+circular linked list,https://www.geeksforgeeks.org/circular-linked-list/
+doubly linked list,https://www.geeksforgeeks.org/doubly-linked-list/
+singly linked list,https://www.geeksforgeeks.org/singly-linked-list/
+binary tree,https://www.geeksforgeeks.org/binary-tree-data-structure/
+binary search tree,https://www.geeksforgeeks.org/binary-search-tree-data-structure/
+tree traversal,https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+AVL tree,https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+segment tree,https://www.geeksforgeeks.org/segment-tree-data-structure/
+fenwick tree,https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
+graph traversal,https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/
+breadth first search,https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+depth first search,https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+dijkstra algorithm,https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm/
+bellman ford algorithm,https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
+floyd warshall algorithm,https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
+kruskal algorithm,https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
+prim algorithm,https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/
+topological sort,https://www.geeksforgeeks.org/topological-sorting/
+strongly connected components,https://www.geeksforgeeks.org/strongly-connected-components/
+union find,https://www.geeksforgeeks.org/union-find/
+disjoint set,https://www.geeksforgeeks.org/disjoint-set-data-structures/
+dynamic programming,https://www.geeksforgeeks.org/dynamic-programming/
+0 1 knapsack,https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
+longest common subsequence,https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/
+matrix chain multiplication,https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/
+edit distance,https://www.geeksforgeeks.org/edit-distance-dp-5/
+coin change,https://www.geeksforgeeks.org/coin-change-dp-7/
+subset sum,https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+trie,https://www.geeksforgeeks.org/trie-insert-and-search/
+hashing,https://www.geeksforgeeks.org/hashing-data-structure/
+open addressing,https://www.geeksforgeeks.org/hashing-set-3-open-addressing/
+separate chaining,https://www.geeksforgeeks.org/separate-chaining-collision-handling-technique-in-hashing/
+time complexity,https://www.geeksforgeeks.org/analysis-of-algorithms-set-3-asymptotic-notations/
+space complexity,https://www.geeksforgeeks.org/g-fact-86/
