@@ -2,9 +2,9 @@ import streamlit as st
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from gfg_link_lookup import load_gfg_links, find_link_from_csv
+from searchengine import find_best_matches, looks_like_code
 
-# --- Load environment variables ---
+# Load environment variables
 load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
@@ -13,11 +13,8 @@ if not OPENROUTER_API_KEY:
     st.error("OPENROUTER_API_KEY not found. Please check your .env file.")
     st.stop()
 
-# --- Initialize OpenAI client using OpenRouter ---
-client = OpenAI(
-    base_url=OPENROUTER_BASE_URL,
-    api_key=OPENROUTER_API_KEY,
-)
+# Initialize OpenAI client via OpenRouter
+client = OpenAI(base_url=OPENROUTER_BASE_URL, api_key=OPENROUTER_API_KEY)
 
 MODEL_NAME = "openai/gpt-4.1-nano"
 generation_config = {
@@ -33,48 +30,42 @@ data structures, time complexity (Big O notation), space complexity, common algo
 Focus on helping users understand the underlying principles.
 """
 
-# --- Load CSV link database ---
-gfg_df = load_gfg_links()
-
-# --- Streamlit UI Setup ---
+# Streamlit UI Setup
 st.set_page_config(page_title="Algorithm Analysis Chatbot", layout="centered")
 
 st.sidebar.header("Useful Resources")
 st.sidebar.markdown("""
-Dive deeper into algorithm analysis with these fantastic platforms:
-
 **GeeksforGeeks:**
 - [Algorithms](https://www.geeksforgeeks.org/fundamentals-of-algorithms/)
 - [Data Structures](https://www.geeksforgeeks.org/data-structures/)
 - [Practice Problems](https://www.geeksforgeeks.org/explore?page=1&category=Data%20Structures%20and%20Algorithms)
 
 **HackerRank:**
-- [Algorithms Domain](https://www.hackerrank.com/domains/algorithms)
-- [Data Structures Domain](https://www.hackerrank.com/domains/data-structures)
-- [Interview Preparation Kit](https://www.hackerrank.com/interview/interview-preparation-kit)
+- [Algorithms](https://www.hackerrank.com/domains/algorithms)
+- [Data Structures](https://www.hackerrank.com/domains/data-structures)
+- [Interview Kit](https://www.hackerrank.com/interview/interview-preparation-kit)
 
 **LeetCode:**
 - [Explore](https://leetcode.com/explore/)
 - [Problems](https://leetcode.com/problemset/all/)
 """)
 
-st.title("💡 Algorithm Analysis Chatbot")
+st.title("\U0001F4A1 Algorithm Analysis Chatbot")
 st.markdown("""
 Welcome! I'm an AI assistant specialized in **Algorithm Analysis**.  
-Ask me anything about algorithms, data structures, time/space complexity, or problem-solving strategies.  
-I'll do my best to explain and guide you!
+Ask me anything about algorithms, data structures, time/space complexity, or problem-solving strategies.
 """)
 
-# --- Chat History State ---
+# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# --- Render Chat History ---
+# Render past messages
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# --- OpenRouter Chat Function ---
+# Chat completion function
 def get_bot_response(prompt: str) -> str:
     messages = [
         {"role": "system", "content": SYSTEM_INSTRUCTION},
@@ -90,24 +81,41 @@ def get_bot_response(prompt: str) -> str:
     except Exception as e:
         return f"⚠️ OpenRouter API error: {e}"
 
-# --- Handle User Prompt ---
-if prompt := st.chat_input("Ask me about algorithm analysis..."):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
+# Tabs: Ask or Code Input
+tab1, tab2 = st.tabs(["\U0001F4AC Ask a Command", "\U0001F4BB Submit Code Example"])
 
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            response = get_bot_response(prompt)
-            link = find_link_from_csv(prompt, gfg_df)
-            if link:
-                response += f"\n\n📚 **Learn more on GeeksforGeeks:** [Click here]({link})"
-            st.markdown(response)
-        st.session_state.messages.append({"role": "assistant", "content": response})
+with tab1:
+    if user_prompt := st.chat_input("Ask a question about algorithms..."):
+        st.session_state.messages.append({"role": "user", "content": user_prompt})
+        with st.chat_message("user"):
+            st.markdown(user_prompt)
 
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking..."):
+                response = get_bot_response(user_prompt)
+                matches = find_best_matches(user_prompt, top_n=3)
+                if matches:
+                    response += "\n\n📚 **Learn more on GeeksforGeeks:**"
+                    for title, url in matches:
+                        response += f"\n- [{title}]({url})"
+                st.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
 
-# --- Clear Chat Button ---
+with tab2:
+    user_code = st.text_area("Paste your algorithm or code snippet here:")
+    if st.button("Explain Code") and user_code.strip():
+        st.session_state.messages.append({"role": "user", "content": f"Please explain this code:\n\n{user_code}"})
+        with st.chat_message("user"):
+            st.markdown(f"```python\n{user_code}\n```)  # Could be adapted for other langs")
+
+        with st.chat_message("assistant"):
+            with st.spinner("Analyzing your code..."):
+                response = get_bot_response(f"Please explain this code:\n\n{user_code}")
+                st.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+
+# Reset
 if st.button("Clear Chat History"):
     st.session_state.messages = []
-    st.experimental_rerun()
+    st.rerun()
 
