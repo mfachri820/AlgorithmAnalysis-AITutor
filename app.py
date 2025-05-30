@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from searchengine import find_best_matches, looks_like_code
+from streamlit_ace import st_ace
 
 # Load environment variables
 load_dotenv()
@@ -23,11 +24,13 @@ generation_config = {
 }
 
 SYSTEM_INSTRUCTION = """
-You are an expert chatbot specializing in Algorithm Analysis.
-Your goal is to provide clear, concise, and accurate explanations for algorithmic concepts,
-data structures, time complexity (Big O notation), space complexity, common algorithms
-(sorting, searching, graph algorithms, dynamic programming, etc.), and problem-solving strategies.
-Focus on helping users understand the underlying principles.
+You are a helpful AI tutor that explains algorithm code step by step.
+
+When the user provides a code snippet, do the following:
+1. Identify the algorithm used (e.g., binary search, quicksort).
+2. Explain the logic line-by-line in simple language.
+3. Provide time and space complexity.
+4. Mention use cases and real-world applications if applicable.
 """
 
 # Streamlit UI Setup
@@ -102,17 +105,54 @@ with tab1:
             st.session_state.messages.append({"role": "assistant", "content": response})
 
 with tab2:
-    user_code = st.text_area("Paste your algorithm or code snippet here:")
-    if st.button("Explain Code") and user_code.strip():
-        st.session_state.messages.append({"role": "user", "content": f"Please explain this code:\n\n{user_code}"})
-        with st.chat_message("user"):
-            st.markdown(f"```python\n{user_code}\n```)  # Could be adapted for other langs")
+    language = st.selectbox("Choose Language", ["python", "c_cpp"])
+    user_code = st_ace(
+    placeholder="Paste or write your code here...",
+    language=language,
+    theme="monokai",
+    key="ace_editor",
+    height=300,
+    font_size=14,
+    tab_size=4,
+    wrap=True,
+    show_gutter=True,
+    show_print_margin=False,
+    auto_update=True,        
+    readonly=False,
+    keybinding="vscode",  
+)
+    
+    if st.button("Explain Code"):
+        if user_code.strip():
+            # Save user code to chat history
+            st.session_state.messages.append({
+                "role": "user",
+                "content": f"Please explain this {language} code:\n\n{user_code}"
+            })
 
-        with st.chat_message("assistant"):
-            with st.spinner("Analyzing your code..."):
-                response = get_bot_response(f"Please explain this code:\n\n{user_code}")
-                st.markdown(response)
-            st.session_state.messages.append({"role": "assistant", "content": response})
+            with st.chat_message("user"):
+                st.markdown(f"```{language}\n{user_code}\n```")
+
+            with st.chat_message("assistant"):
+                with st.spinner("Analyzing your code..."):
+                    response = get_bot_response(f"Please explain this {language} code:\n\n{user_code}")
+                    st.markdown("### 🧠 Explanation")
+                    st.markdown(response)
+
+                    # Search for relevant articles
+                    matches = find_best_matches(user_code, top_n=3)
+                    if matches:
+                        st.markdown("### 📚 Relevant Articles from GeeksforGeeks")
+                        for title, url in matches:
+                            st.markdown(f"- [{title}]({url})")
+
+                # Save assistant response to chat history
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": response
+                })
+        else:
+            st.warning("Please enter some code to explain.")
 
 # Reset
 if st.button("Clear Chat History"):
