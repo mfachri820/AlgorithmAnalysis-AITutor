@@ -32,6 +32,18 @@ When the user provides a code snippet, do the following:
 3. Provide time and space complexity.
 4. Mention use cases and real-world applications if applicable.
 """
+# Allow only algorithm-related questions
+ALLOWED_TOPICS = [
+    "algorithm", "data structure", "complexity", "code", "sorting",
+    "searching", "graph", "tree", "linked list", "recursion", "greedy",
+    "dynamic programming", "bfs", "dfs", "shortest path", "code analysis",
+    "time complexity", "space complexity", "big O notation", "divide and conquer", "code"
+    "coding", "problem solving", "algorithm design", "optimization"
+]
+
+def is_algorithm_related(prompt: str) -> bool:
+    return any(keyword in prompt.lower() for keyword in ALLOWED_TOPICS)
+
 
 # Streamlit UI Setup
 st.set_page_config(page_title="Algorithm Analysis Chatbot", layout="centered")
@@ -70,6 +82,9 @@ for msg in st.session_state.messages:
 
 # Chat completion function
 def get_bot_response(prompt: str) -> str:
+    if not is_algorithm_related(prompt):
+        return "🚫 I'm here to help with algorithm-related topics only. Try asking about sorting, graphs, recursion, or complexity analysis."
+
     messages = [
         {"role": "system", "content": SYSTEM_INSTRUCTION},
         {"role": "user", "content": prompt}
@@ -84,6 +99,7 @@ def get_bot_response(prompt: str) -> str:
     except Exception as e:
         return f"⚠️ OpenRouter API error: {e}"
 
+
 # Tabs: Ask or Code Input
 tab1, tab2 = st.tabs(["\U0001F4AC Ask a Command", "\U0001F4BB Submit Code Example"])
 
@@ -96,16 +112,17 @@ with tab1:
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = get_bot_response(user_prompt)
-                matches = find_best_matches(user_prompt, top_n=3)
-                if matches:
-                    response += "\n\n📚 **Learn more on GeeksforGeeks:**"
-                    for title, url in matches:
-                        response += f"\n- [{title}]({url})"
+                if is_algorithm_related(user_prompt):
+                    matches = find_best_matches(user_prompt, top_n=3)
+                    if matches:
+                        response += "\n\n📚 **Learn more on GeeksforGeeks:**"
+                        for title, url in matches:
+                            response += f"\n- [{title}]({url})"
                 st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
 
 with tab2:
-    language = st.selectbox("Choose Language", ["python", "c_cpp"])
+    language = st.selectbox("Choose Language", ["python", "c++"])
     user_code = st_ace(
     placeholder="Paste or write your code here...",
     language=language,
