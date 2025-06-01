@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from searchengine import find_best_matches, looks_like_code
 from streamlit_ace import st_ace
+from fuzzywuzzy import fuzz
+
 
 # Load environment variables
 load_dotenv()
@@ -34,15 +36,45 @@ When the user provides a code snippet, do the following:
 """
 # Allow only algorithm-related questions
 ALLOWED_TOPICS = [
-    "algorithm", "data structure", "complexity", "code", "sorting",
-    "searching", "graph", "tree", "linked list", "recursion", "greedy",
-    "dynamic programming", "bfs", "dfs", "shortest path", "code analysis",
-    "time complexity", "space complexity", "big O notation", "divide and conquer", "code"
-    "coding", "problem solving", "algorithm design", "optimization"
+    # Fundamental concepts
+    "algorithm", "data structure", "complexity", "big O notation", "time complexity", "space complexity",
+    "divide and conquer", "greedy", "dynamic programming", "recursion", "memoization", "tabulation",
+
+    # Sorting
+    "sorting", "bubble sort", "selection sort", "insertion sort", "merge sort", "quick sort", "radix sort", "counting sort", "heap sort", "bucket sort",
+
+    # Searching
+    "searching", "binary search", "linear search", "interpolation search", "exponential search",
+
+    # Graphs
+    "graph", "bfs", "dfs", "shortest path", "dijkstra", "floyd warshall", "bellman ford", "topological sort",
+    "minimum spanning tree", "mst", "kruskal", "prim", "connected components", "scc", "bridge", "articulation point",
+
+    # Trees
+    "tree", "binary tree", "bst", "avl", "segment tree", "fenwick tree", "heap", "trie", "prefix tree", "suffix tree", "huffman tree",
+
+    # Linked structures
+    "linked list", "doubly linked list", "circular linked list", "stack", "queue", "priority queue", "deque",
+
+    # String algorithms
+    "string matching", "kmp", "rabin karp", "manacher", "z algorithm", "suffix array", "lcs", "edit distance",
+
+    # DP problems
+    "knapsack", "coin change", "matrix chain multiplication", "subset sum", "lcs", "lis", "edit distance",
+
+    # Others
+    "hashing", "hash map", "sliding window", "two pointers", "backtracking", "brute force", "optimization",
+    "problem solving", "algorithm design", "code", "coding", "code analysis", "complexity analysis"
 ]
 
-def is_algorithm_related(prompt: str) -> bool:
-    return any(keyword in prompt.lower() for keyword in ALLOWED_TOPICS)
+
+def is_algorithm_related(prompt: str, threshold: int = 80) -> bool:
+    prompt_lower = prompt.lower()
+    for topic in ALLOWED_TOPICS:
+        score = fuzz.partial_ratio(prompt_lower, topic.lower())
+        if score >= threshold:
+            return True
+    return False
 
 
 # Streamlit UI Setup
