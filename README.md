@@ -50,6 +50,7 @@ Chatbot ini dirancang untuk membantu Anda mempelajari **Analisis Algoritma dan S
 ```bash
 streamlit run app.py
 Aplikasi akan terbuka di browser Anda (biasanya http://localhost:8501).
+```
 
 🤖 Cara Menggunakan
 Ketik pertanyaan Anda di kotak obrolan.
