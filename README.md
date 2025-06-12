@@ -58,10 +58,11 @@ Dapatkan penjelasan dan rekomendasi tautan.
 Gunakan "Clear Chat History" untuk memulai ulang.
 
 ## 📁 Struktur Proyek
-.
+```bash
 ├── app.py              # Kode utama aplikasi
 ├── .env                # Kunci API (RAHASIA!)
 └── requirements.txt    # Daftar dependensi Python
+```
 
 ## ⚙️ Kustomisasi
 Ganti Model LLM: Ubah OPENROUTER_MODEL_NAME di app.py (cek OpenRouter.ai/docs untuk model lain).
