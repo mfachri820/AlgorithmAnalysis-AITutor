@@ -39,6 +39,12 @@ ALLOWED_TOPICS = [
     "dynamic programming", "bfs", "dfs", "shortest path", "code analysis",
     "time complexity", "space complexity", "big O notation", "divide and conquer", "code"
     "coding", "problem solving", "algorithm design", "optimization"
+    "algorithm analysis", "algorithm explanation", "algorithm implementation"
+    "algorithm efficiency", "algorithm performance", "algorithm examples"
+    "explain", "confused", "help", "question", "query", "issue", "problem"
+    "understand", "clarify", "debug", "fix", "solution", "algorithmic thinking"
+    "explain code", "algorithm concepts", "algorithm techniques", "algorithm strategies"
+    "algorithm patterns", "algorithm challenges", "algorithm tutorials" 
 ]
 
 def is_algorithm_related(prompt: str) -> bool:
