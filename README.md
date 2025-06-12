@@ -1,7 +1,5 @@
 # 💡 Chatbot Analisis Algoritma
 
-![Algorithm Analysis Chatbot Screenshot (Placeholder)](https://via.placeholder.com/600x300?text=Chatbot+Analisis+Algoritma)
-
 Chatbot ini dirancang untuk membantu Anda mempelajari **Analisis Algoritma dan Struktur Data** menggunakan Streamlit dan OpenRouter API.
 
 ---
