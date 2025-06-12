@@ -52,20 +52,23 @@ streamlit run app.py
 Aplikasi akan terbuka di browser Anda (biasanya http://localhost:8501).
 ```
 
-🤖 Cara Menggunakan
+## 🤖 Cara Menggunakan
 Ketik pertanyaan Anda di kotak obrolan.
 Dapatkan penjelasan dan rekomendasi tautan.
 Gunakan "Clear Chat History" untuk memulai ulang.
-📁 Struktur Proyek
+
+## 📁 Struktur Proyek
 .
 ├── app.py              # Kode utama aplikasi
 ├── .env                # Kunci API (RAHASIA!)
 └── requirements.txt    # Daftar dependensi Python
-⚙️ Kustomisasi
+
+## ⚙️ Kustomisasi
 Ganti Model LLM: Ubah OPENROUTER_MODEL_NAME di app.py (cek OpenRouter.ai/docs untuk model lain).
 Sesuaikan Persona: Edit SYSTEM_INSTRUCTION di app.py.
 Perbarui Tautan: Modifikasi kamus ALGORITHM_LINKS di app.py.
-🤝 Kontribusi
+
+## 🤝 Kontribusi
 Selamat datang untuk berkontribusi!
 
 📄 Lisensi
